@@ -18,6 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Views.market.MarketActivity" >
+        </activity>
+        <activity android:name=".Views.market.MarketActivity2" >
+        </activity>
+        <activity android:name=".Views.market.MarketActivity3" >
+        </activity>
+        <activity android:name=".Views.market.MarketActivity4" >
+        </activity>
     </application>
 
 </manifest>

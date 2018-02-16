@@ -34,6 +34,11 @@ public class BasicSQLContracts {
         db.execSQL(BasicTokenTable.SQL_CREATE);
         db.execSQL(AddressTokenValueTable.SQL_CREATE);
         db.execSQL(ValueTransactionTable.SQL_CREATE);
+        db.execSQL(SupplierTable.SQL_CREATE);
+        db.execSQL(SuperMarketTable.SQL_CREATE);
+        db.execSQL(CustomerTable.SQL_CREATE);
+        db.execSQL(ProductTable.SQL_CREATE);
+
 
 
         // Create Indices
@@ -57,7 +62,6 @@ public class BasicSQLContracts {
         db.execSQL(DROP_TABLE_IF_EXISTS + ValueTransactionTable.TABLE_NAME + SEMICOLON_SEP);
         db.execSQL(DROP_TABLE_IF_EXISTS + AddressTokenValueTable.TABLE_NAME + SEMICOLON_SEP);
     }
-
     public static abstract class AddressTokenValueTable implements BaseColumns{
 
         public static final String TABLE_NAME = "AddressTokenValueTable";
@@ -166,6 +170,7 @@ public class BasicSQLContracts {
         public static final String COLUMN_NAME_GENERAL_SUPPLY ="GeneralSupply";
         public static final String COLUMN_NAME_GENESIS_SUPPLY= "GenesisSupply";
         public static final String COLUMN_NAME_CREATION_DATE = "CreationDate";
+        public static final String COLUMN_NAME_TOKEN_TYPE= "TokenType";
 
         public static final String INDEX_NAME_NAME_COLUMN = "nameIndex";
 
@@ -177,6 +182,7 @@ public class BasicSQLContracts {
         public static final int totalSupplyColumn=4;
         public static final int genesisSupplyColumn =5;
         public static final int creationDateColumn =6;
+        public static final int tokenTypeColumn =7;
 
         // create statement
         public static final String SQL_CREATE =
@@ -188,11 +194,12 @@ public class BasicSQLContracts {
                         COLUMN_NAME_GENERAL_SUPPLY + INTEGER + NOT_NULL + COMMA_SEP +
                         COLUMN_NAME_GENESIS_SUPPLY + INTEGER + NOT_NULL + COMMA_SEP +
                         COLUMN_NAME_CREATION_DATE + TEXT_TYPE + DEFAULT_CURRENT_TIME  +
+                        COLUMN_NAME_TOKEN_TYPE + INTEGER + NOT_NULL + COMMA_SEP +
                         " );";
         // all column names - handy for querries
         public static String[] allColumns = {_ID, COLUMN_NAME_NAME, COLUMN_NAME_SYMBOL,
                 COLUMN_NAME_DECIMALS, COLUMN_NAME_GENERAL_SUPPLY,
-                COLUMN_NAME_GENESIS_SUPPLY,  COLUMN_NAME_CREATION_DATE};
+                COLUMN_NAME_GENESIS_SUPPLY, COLUMN_NAME_TOKEN_TYPE, COLUMN_NAME_CREATION_DATE};
 
         /*
          * Create and destroy index
@@ -202,6 +209,160 @@ public class BasicSQLContracts {
         public static String DROP_INDEX_NAME_COLUMN = "DROP INDEX "+ INDEX_NAME_NAME_COLUMN;
 
 
+
+    }
+    /**
+     * Table holding the basic Properties of a Supplier
+     */
+    public static abstract class SupplierTable implements BaseColumns {
+        public static final String TABLE_NAME = "SupplierTable";
+        public static final String COLUMN_NAME_TOKEN_ID="TokenID";
+        public static final String COLUMN_NAME_PRODUCTION= "Production";
+        public static final String COLUMN_NAME_RAW_MATERIAL = "RawMaterial";
+
+        public static final String INDEX_NAME_TOKEN_ID="indexTokenID";
+
+
+        public static final int idColumn =0;
+        public static final int tokenIDColumn=1;
+        public static final int productionColumn=2;
+        public static final int rawMaterialColumn=3;
+
+
+        // create statement
+        public static final String SQL_CREATE =
+                CREATE_TABLE_IF_NOT_EXISTS + TABLE_NAME + " (" +
+                        _ID + INTEGER_PRIMARY_KEY + NOT_NULL + COMMA_SEP +
+                        COLUMN_NAME_TOKEN_ID + INTEGER + NOT_NULL + COMMA_SEP +
+                        COLUMN_NAME_PRODUCTION + INTEGER + NOT_NULL + COMMA_SEP +
+                        COLUMN_NAME_RAW_MATERIAL + INTEGER + NOT_NULL + COMMA_SEP + DEFAULT_CURRENT_TIME +
+                        "FOREIGN KEY(" + COLUMN_NAME_TOKEN_ID + ") REFERENCES "
+                        + BasicTokenTable.TABLE_NAME + "(" + BasicTokenTable._ID + ")" + COMMA_SEP+
+                        " );";
+        // all column names - handy for querries
+        public static String[] allColumns = {_ID, COLUMN_NAME_TOKEN_ID, COLUMN_NAME_PRODUCTION,
+                COLUMN_NAME_RAW_MATERIAL};
+
+        /*
+        * Create and destroy index
+        */
+        public static String CREATE_INDEX_TOKEN_ID = CREATE_INDEX_IF_NOT_EXISTENT+ INDEX_NAME_TOKEN_ID +" ON "
+                + TABLE_NAME + " ("+COLUMN_NAME_TOKEN_ID+" ASC )";
+        public static String DROP_INDEX_NAME_COLUMN = "DROP INDEX "+ CREATE_INDEX_TOKEN_ID;
+
+
+
+    }
+    /**
+     * Table holding the basic Properties of a Super Market.
+     */
+    public static abstract class SuperMarketTable implements BaseColumns {
+        public static final String TABLE_NAME = "SuperMarketTable";
+        public static final String COLUMN_NAME_TOKEN_ID="TokenID";
+        public static final String COLUMN_NAME_WASTE= "Waste";
+        public static final String COLUMN_NAME_TOTAL_PRODUCTS = "TotalProducts";
+
+        public static final String INDEX_NAME_TOKEN_ID="indexTokenID";
+
+
+
+        public static final int idColumn=0;
+        public static final int tokenIDColumn=0;
+        public static final int productionColumn=1;
+        public static final int rawMaterialColumn=2;
+
+
+        // create statement
+        public static final String SQL_CREATE =
+                CREATE_TABLE_IF_NOT_EXISTS + TABLE_NAME + " (" +
+                        _ID + INTEGER_PRIMARY_KEY + NOT_NULL + COMMA_SEP +
+                        COLUMN_NAME_TOKEN_ID + INTEGER + NOT_NULL + COMMA_SEP +
+                        COLUMN_NAME_WASTE + INTEGER + NOT_NULL + COMMA_SEP +
+                        COLUMN_NAME_TOTAL_PRODUCTS + INTEGER + NOT_NULL + COMMA_SEP + DEFAULT_CURRENT_TIME +
+                        "FOREIGN KEY(" + COLUMN_NAME_TOKEN_ID + ") REFERENCES "
+                        + BasicTokenTable.TABLE_NAME + "(" + BasicTokenTable._ID + ")" + COMMA_SEP+
+                        " );";
+        // all column names - handy for querries
+        public static String[] allColumns = {_ID, COLUMN_NAME_TOKEN_ID, COLUMN_NAME_WASTE,
+                COLUMN_NAME_TOTAL_PRODUCTS};
+
+        /*
+         * Create and destroy index
+         */
+        public static String CREATE_INDEX_TOKEN_ID = CREATE_INDEX_IF_NOT_EXISTENT+ INDEX_NAME_TOKEN_ID +" ON "
+                + TABLE_NAME + " ("+COLUMN_NAME_TOKEN_ID+" ASC )";
+        public static String DROP_INDEX_NAME_COLUMN = "DROP INDEX "+ CREATE_INDEX_TOKEN_ID;
+
+
+
+    }
+    /**
+     * Table holding the basic Properties of a Customer Table.
+     */
+    public static abstract class CustomerTable implements BaseColumns {
+        public static final String TABLE_NAME = "CustomerTable";
+        public static final String COLUMN_NAME_TOKEN_ID="TokenID";
+
+        public static final String INDEX_NAME_TOKEN_ID="indexTokenID";
+
+
+        public static final int idColumn =0;
+        public static final int tokenIDColumn=1;
+
+
+        // create statement
+        public static final String SQL_CREATE =
+                CREATE_TABLE_IF_NOT_EXISTS + TABLE_NAME + " (" +
+                        _ID + INTEGER_PRIMARY_KEY + NOT_NULL + COMMA_SEP +
+                        COLUMN_NAME_TOKEN_ID + TEXT_TYPE + NOT_NULL + COMMA_SEP + DEFAULT_CURRENT_TIME +
+                        "FOREIGN KEY(" + COLUMN_NAME_TOKEN_ID + ") REFERENCES "
+                        + BasicTokenTable.TABLE_NAME + "(" + BasicTokenTable._ID + ")" + COMMA_SEP+
+                        " );";
+        // all column names - handy for querries
+        public static String[] allColumns = {_ID, COLUMN_NAME_TOKEN_ID};
+
+        /*
+         * Create and destroy index
+         */
+        public static String CREATE_INDEX_TOKEN_ID = CREATE_INDEX_IF_NOT_EXISTENT + INDEX_NAME_TOKEN_ID +" ON "
+                + TABLE_NAME + " ("+COLUMN_NAME_TOKEN_ID+" ASC )";
+        public static String DROP_INDEX_NAME_COLUMN = "DROP INDEX "+ CREATE_INDEX_TOKEN_ID;
+
+    }
+    /**
+     * Table holding the basic Properties of a Product Table.
+     */
+    public static abstract class ProductTable implements BaseColumns {
+        public static final String TABLE_NAME = "ProductTable";
+        public static final String COLUMN_NAME_TOKEN_ID="TokenID";
+        public static final String COLUMN_NAME_RATING="Rating";
+
+        public static final String INDEX_NAME_TOKEN_ID="indexTokenID";
+
+
+        public static final int idColumn =0;
+        public static final int addressColumn=1;
+
+
+        // create statement
+        public static final String SQL_CREATE =
+                CREATE_TABLE_IF_NOT_EXISTS + TABLE_NAME + " (" +
+                        _ID + INTEGER_PRIMARY_KEY + NOT_NULL + COMMA_SEP +
+                        COLUMN_NAME_TOKEN_ID + TEXT_TYPE + NOT_NULL + COMMA_SEP +
+                        COLUMN_NAME_RATING + TEXT_TYPE + NOT_NULL + COMMA_SEP +
+                        DEFAULT_CURRENT_TIME +
+                        "FOREIGN KEY(" + COLUMN_NAME_TOKEN_ID + ") REFERENCES "
+                        + BasicTokenTable.TABLE_NAME + "(" + BasicTokenTable._ID + ")" + COMMA_SEP+
+                        " );";
+        // all column names - handy for querries
+        public static String[] allColumns = {_ID, COLUMN_NAME_TOKEN_ID, COLUMN_NAME_RATING};
+
+        /*
+         * Create and destroy index
+         */
+        public static String CREATE_INDEX_TOKEN_ID = CREATE_INDEX_IF_NOT_EXISTENT + INDEX_NAME_TOKEN_ID +" ON "
+                + TABLE_NAME + " ("+COLUMN_NAME_TOKEN_ID+" ASC )";
+        public static String DROP_INDEX_NAME_COLUMN = "DROP INDEX "+ CREATE_INDEX_TOKEN_ID;
 
     }
 

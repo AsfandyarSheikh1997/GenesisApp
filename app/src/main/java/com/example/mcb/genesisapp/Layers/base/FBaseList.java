@@ -18,7 +18,7 @@ import com.example.mcb.genesisapp.R;
 import com.example.mcb.genesisapp.State.StateActivity;
 import com.example.mcb.genesisapp.State.StateCallback;
 import com.example.mcb.genesisapp.Views.creator.CreatorFragment;
-import com.example.mcb.genesisapp.Views.FProjects;
+import com.example.mcb.genesisapp.Views.market.FProjects;
 import com.example.mcb.genesisapp.Views.wallet.FWallet;
 import com.example.mcb.genesisapp.Views.ObtainerFragment;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;

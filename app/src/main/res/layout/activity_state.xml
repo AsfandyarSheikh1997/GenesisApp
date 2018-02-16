@@ -56,19 +56,19 @@
                         android:id="@+id/state_activity_netti_export_txtv" />
 
 
-
                     <TextView
-                        android:layout_width="0dp"
+                        android:id="@+id/state_activity_netti_logo_txtv"
+                        android:layout_width="243dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="Genesis"
-                        android:textSize="25sp"
                         android:layout_gravity="right"
-                        android:gravity="right|center_vertical"
-                        android:layout_marginRight="20dp"
                         android:layout_marginEnd="20dp"
-                        android:backgroundTint="@color/greydark"
-                        android:id="@+id/state_activity_netti_logo_txtv"/>
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/black"
+                        android:gravity="right|center_vertical"
+                        android:text="Food Saviours"
+                        android:textColor="@color/black"
+                        android:textSize="25sp" />
 
 
                 </LinearLayout>

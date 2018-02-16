@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,8 @@ import android.widget.ViewSwitcher;
 import com.example.mcb.genesisapp.Layers.base.FBaseList;
 import com.example.mcb.genesisapp.R;
 import com.example.mcb.genesisapp.Repository.SQLite.BasicSQLiteRepo;
+import com.example.mcb.genesisapp.State.*;
+import com.example.mcb.genesisapp.Views.market.MarketActivity;
 
 
 import java.util.ArrayList;
@@ -356,6 +359,8 @@ public class StateActivity extends AppCompatActivity implements StateCallback{
             fragmentManager = getSupportFragmentManager();
 
 
+
+
         }
 
         //final function, also set first view
@@ -526,6 +531,8 @@ public class StateActivity extends AppCompatActivity implements StateCallback{
             return false;
         }
     }
+
+
 
 
 
