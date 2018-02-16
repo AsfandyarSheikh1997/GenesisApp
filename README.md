@@ -1,3 +1,11 @@
+In the commited code, the database and user interface can be observed. Our thought processes, the workflow and also some Pseudocode implementations of some methods can be seen in the following few images:
+
+<p align="center">
+  <img src="./Concept1.jpeg" width="350"/>
+  <img src="./Concept2.jpeg" width="350"/>
+  <img src="./Concept3.jpeg" width="350"/>
+</p>
+
 # GenesisApp
 
 Mobile Application, which allows the user to create, deploy, utilize and obtain tokens.
